@@ -49,14 +49,16 @@ func transition_state(from: State, to: State) -> void:
 		State.keys()[from] if from != -1 else "<START>",
 		State.keys()[to]
 	])
-
+	
 	match to:
 		State.IDLE:
 			animation_player.play("idle")
-
+			if wall_checker.is_colliding():
+				@warning_ignore("int_as_enum_without_cast")
+				direction *= -1
 		State.WALK:
 			animation_player.play("walk")
-			if wall_checker.is_colliding():
+			if not floor_checker.is_colliding():
 				@warning_ignore("int_as_enum_without_cast")
 				direction *= -1
 				floor_checker.force_raycast_update()

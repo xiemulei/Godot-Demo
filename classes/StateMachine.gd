@@ -20,5 +20,6 @@ func _physics_process(delta: float) -> void:
 		if current_state == next:
 			break
 		current_state = next
-	
+
+	state_time += delta
 	owner.tick_physics(current_state, delta)
