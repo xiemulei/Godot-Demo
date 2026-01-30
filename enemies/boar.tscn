@@ -7,6 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://dwda5ag80y8g2" path="res://assets/legacy_fantasy/Boar/Run-Sheet.png" id="4_gvyro"]
 [ext_resource type="Texture2D" uid="uid://b3vqlyf8bg07w" path="res://assets/legacy_fantasy/Boar/Walk-Base-Sheet.png" id="5_imo2m"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iippf"]
+size = Vector2(22, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qb4tn"]
+size = Vector2(40, 10)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_imo2m"]
 radius = 11.0
 
@@ -228,31 +234,49 @@ _data = {
 [node name="Boar" unique_id=785400443 instance=ExtResource("1_7qeyt")]
 script = ExtResource("2_iippf")
 
-[node name="Sprite2D" parent="Graphics" index="0"]
+[node name="Sprite2D" parent="Graphics" parent_id_path=PackedInt32Array(1630128777) index="0" unique_id=1018152563]
 position = Vector2(0, -16)
 texture = ExtResource("2_ctdmm")
 hframes = 4
 
-[node name="WallChecker" type="RayCast2D" parent="Graphics" index="1" unique_id=563105808]
+[node name="WallChecker" type="RayCast2D" parent="Graphics" parent_id_path=PackedInt32Array(1630128777) index="1" unique_id=563105808]
 position = Vector2(-9, -12)
 target_position = Vector2(-13, 0)
 
-[node name="PlayerChecker" type="RayCast2D" parent="Graphics" index="2" unique_id=771428801]
+[node name="PlayerChecker" type="RayCast2D" parent="Graphics" parent_id_path=PackedInt32Array(1630128777) index="2" unique_id=771428801]
 position = Vector2(-9, -12)
 target_position = Vector2(-100, 0)
 collision_mask = 3
 
-[node name="FloorChecker" type="RayCast2D" parent="Graphics" index="3" unique_id=1961460026]
+[node name="FloorChecker" type="RayCast2D" parent="Graphics" parent_id_path=PackedInt32Array(1630128777) index="3" unique_id=1961460026]
 position = Vector2(-14, -1)
 target_position = Vector2(0, 4)
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/HitBox" parent_id_path=PackedInt32Array(1913015875) index="0" unique_id=1801435921]
+position = Vector2(-1, -11)
+shape = SubResource("RectangleShape2D_iippf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/HitBox" parent_id_path=PackedInt32Array(1913015875) index="1" unique_id=1069016135]
+position = Vector2(-1, -9)
+shape = SubResource("RectangleShape2D_qb4tn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/HurtBox" parent_id_path=PackedInt32Array(1869896846) index="0" unique_id=638880028]
+position = Vector2(-1, -11)
+shape = SubResource("RectangleShape2D_iippf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/HurtBox" parent_id_path=PackedInt32Array(1869896846) index="1" unique_id=680533032]
+position = Vector2(-1, -9)
+shape = SubResource("RectangleShape2D_qb4tn")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=546270373]
 position = Vector2(-1, -11)
 shape = SubResource("CircleShape2D_imo2m")
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="2" unique_id=1726219775]
 libraries/ = SubResource("AnimationLibrary_imo2m")
 
 [node name="CalmDownTimer" type="Timer" parent="." index="4" unique_id=1213978277]
 wait_time = 2.5
 one_shot = true
+
+[connection signal="hurt" from="Graphics/HurtBox" to="." method="_on_hurtbox_hurt"]

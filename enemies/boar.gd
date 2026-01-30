@@ -69,3 +69,7 @@ func transition_state(from: State, to: State) -> void:
 				floor_checker.force_raycast_update()
 		State.RUN:
 			animation_player.play("run")
+
+
+func _on_hurtbox_hurt(hitbox: HitBox) -> void:
+	print("Ouch!")
